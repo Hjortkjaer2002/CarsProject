@@ -1,0 +1,153 @@
+<html>
+	<head>
+		<title>Index Page</title>
+		<style>
+			html {
+				background-color: black;
+			}
+			
+			body {
+				width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 100px;
+			}
+			
+			img {
+				width: 600px;
+			}
+			
+			ul {
+				font-size: 24px;
+				color: white;
+			}
+			
+			button {
+				font-size: 18px;
+			}
+			
+			h1 {
+				color: white;
+			}
+			
+			h2 { 
+				color: white;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<h1>LIGHTNING MCQUEEN</h1>
+		<h2>I AM SPEED!!!</h2>
+		
+		<img src="https://wallpapersok.com/images/hd/sports-car-lightning-mcqueen-iged7iqzbisyptzv.jpg">
+		
+		<button id="add-heading">Click me to hear the hard truth</button>
+		
+		<ul>
+			<li>
+			<a href="detail.html?quote_id=1">KA-CHOW</a>
+			</li>
+			
+			<li>
+			<a href="detail.html?quote_id=2">KA-CHIGGA</a>
+			</li>
+		</ul>
+		
+		<div id="container">
+		</div>
+		
+		<script>
+			fetch("http://157.230.214.215/api/Lucas_Cars").then(response => response.json()).then(data_from_api => {
+				console.log(data_from_api);
+			})
+			
+			var url_data = new URLSearchParams(window.location.search);
+			console.log(url_data.get("cars_id"));
+			
+			var cars_id = url_data.get("cars_id");
+			
+			var Cars = {
+				producer: "Pixar",
+				directors: "Unknown",
+				characters: [
+					{
+						name: "lightning_mcqueen", 
+						color: "red",
+						piston_cup_winner: true
+					}, 
+					"Sally",
+					"Doc Hudson"
+				]
+			};
+			
+			var btn = document.getElementById("add-heading");
+			btn.addEventListener('click', createHeading)
+			
+			function createHeading() {
+				var new_heading = document.createElement("h1");
+				// ^ <h1></h1>
+				
+				new_heading.innerText = "I am too fast for you!";
+				// ^ <h1>"This is a new heading"</h1>
+				new_heading.style.color = "white";
+				
+				var container = document.getElementById("container")
+				container.appendChild(new_heading);
+			}
+			
+			// First cheat code (yolo)
+			const cheat_code1 = ['y', 'o', 'l', 'o'];
+			let human_input1 = [];
+			let current_index1 = 0;
+
+			// Second cheat code (speed)
+			const cheat_code2 = ['s', 'p', 'e', 'e', 'd'];
+			let human_input2 = [];
+			let current_index2 = 0;
+
+			// Listen for key presses
+			document.addEventListener('keydown', doKeypress);
+
+			function doKeypress(event) {
+				console.log(event.key);
+
+				// Handle first cheat code
+				if (event.key === cheat_code1[current_index1]) {
+					human_input1.push(event.key);
+					current_index1++;
+        
+					if (human_input1.length === cheat_code1.length) {
+						window.open('https://www.youtube.com/watch?v=xvFZjo5PgG0&ab_channel=Duran', '_blank', 'width=800,height=600');
+						resetCheatCode(1); // Reset first cheat code
+					}
+				} else {
+					resetCheatCode(1);
+				}
+
+				// Handle second cheat code
+				if (event.key === cheat_code2[current_index2]) {
+					human_input2.push(event.key);
+					current_index2++;
+
+					if (human_input2.length === cheat_code2.length) {
+						window.open('https://www.youtube.com/watch?v=sXRAtBX5HRw&ab_channel=RemasteredbyRon', '_blank', 'width=800,height=600');
+						resetCheatCode(2); // Reset second cheat code
+					}
+				} else {
+					resetCheatCode(2);
+				}
+			}
+
+			function resetCheatCode(codeNumber) {
+				if (codeNumber === 1) {
+					human_input1 = [];
+					current_index1 = 0;
+				} else if (codeNumber === 2) {
+					human_input2 = [];
+					current_index2 = 0;
+				}
+			}
+		</script>
+	</body>
+</html>
