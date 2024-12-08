@@ -14,7 +14,8 @@
 			}
 			
 			img {
-				width: 600px;
+				width: 100%; 
+				max-width: 600px;
 			}
 			
 			ul {
@@ -45,22 +46,21 @@
 		<button id="add-heading">Click me to hear the hard truth</button>
 		
 		<ul>
-			<li>
-			<a href="detail.html?quote_id=1">KA-CHOW</a>
-			</li>
-			
-			<li>
-			<a href="detail.html?quote_id=2">KA-CHIGGA</a>
-			</li>
 		</ul>
 		
 		<div id="container">
 		</div>
 		
 		<script>
-			fetch("http://157.230.214.215/api/Lucas_Cars").then(response => response.json()).then(data_from_api => {
-				console.log(data_from_api);
-			})
+			fetch("http://157.230.214.215/api/Lucas_Cars").then(response => response.json()).then(data => {
+				const ul = document.querySelector('ul');
+				data.forEach(item => {
+				const li = document.createElement('li');
+				li.innerHTML = `<a href="detail.html?id=${item.id}">${item.name}</a>`;
+				ul.appendChild(li);
+				});
+				})
+			.catch(error => console.error('Error fetching data:', error));
 			
 			var url_data = new URLSearchParams(window.location.search);
 			console.log(url_data.get("cars_id"));
