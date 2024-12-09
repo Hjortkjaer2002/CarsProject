@@ -32,29 +32,33 @@
         }
 
         #animation-container {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            height: 300px;
-            margin-top: 50px;
-        }
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			overflow: hidden;
+			z-index: 10;
+			pointer-events: none; /* Disable interaction with this container */
+		}
 
-        .mcqueen {
-            position: absolute;
-            top: 50%; /* Center vertically */
-            left: -200px; /* Start off-screen to the left */
-            transform: translateY(-50%);
-            width: 200px; /* Adjust size as needed */
-        }
+		.mcqueen {
+			position: absolute;
+			top: 28%; /* Center vertically */
+			left: -200px; /* Start off-screen to the left */
+			transform: translateY(-50%);
+			width: 200px; /* Adjust size as needed */
+			pointer-events: auto; /* Ensure McQueen itself can interact if needed */
+		}
 
-        @keyframes moveAcrossScreen {
-            from {
-                left: -200px; /* Start off-screen */
-            }
-            to {
-                left: 100%; /* Move off-screen to the right */
-            }
-        }
+		@keyframes moveAcrossScreen {
+			from {
+				left: -200px; /* Start well off-screen */
+			}
+			to {
+				left: 100vw; /* Move fully across the screen */
+			}
+		}
     </style>
 </head>
 <body>
@@ -131,7 +135,8 @@
                 current_index2++;
 
                 if (human_input2.length === cheat_code2.length) {
-                    triggerAnimation();
+                    alert("There is a 100% chance of LIGHTNING!");
+					triggerAnimation();
                     resetCheatCode(2);
                 }
             } else {
@@ -140,14 +145,15 @@
         }
 
         function triggerAnimation() {
-            const mcqueenImage = document.querySelector('.mcqueen');
-            mcqueenImage.style.animation = 'moveAcrossScreen 3s linear';
+			const mcqueenImage = document.querySelector('.mcqueen');
+			mcqueenImage.style.animation = 'moveAcrossScreen 1.5s linear';
 
-            // Remove animation style after it ends
-            setTimeout(() => {
-                mcqueenImage.style.animation = ''; // Reset animation
-            }, 3000);
-        }
+			// Remove animation style after it ends
+			setTimeout(() => {
+				mcqueenImage.style.animation = ''; // Reset animation
+			}, 2000);
+		}
+
 
         function resetCheatCode(codeNumber) {
             if (codeNumber === 1) {
